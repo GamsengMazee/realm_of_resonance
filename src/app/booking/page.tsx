@@ -117,8 +117,9 @@ export default function BookingPage() {
 
   const isPrevDisabled = useMemo(() => {
     const today = DateTime.now().startOf("day");
+    // Disable the previous button if the currentStartDate is today
     return currentStartDate <= today;
-  }, []);
+  }, [currentStartDate]);
 
   // Generate week days and time slots
   const weekDays = useMemo(
