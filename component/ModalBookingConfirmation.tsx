@@ -68,10 +68,10 @@ function BookingConfirmation({ modalShow, handleClose, data }: typeProps) {
 
             <hr />
             <ul className="flex-1/2">
-              <li><span className="font-bold">Name:</span> {data.name}</li>
+              <li><span className="font-bold capitalize">Name:</span> {data.name}</li>
               <li><span className="font-bold">Email:</span> {data.email}</li>
               <li><span className="font-bold">Contact:</span> +91 {data.contact}</li>
-              <li><span className="font-bold">Address:</span> {data.address}</li>
+              <li><span className="font-bold capitalize">Address:</span> {data.address}</li>
             </ul>
           </div>
         </Modal.Body>

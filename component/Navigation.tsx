@@ -5,6 +5,7 @@ import { Menu, X, Volume2 } from 'lucide-react';
 import { Button } from './ui/button';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 
 const Navigation = () => {
@@ -22,11 +23,8 @@ const Navigation = () => {
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <Volume2 className="w-8 h-8 text-red-600" />
-            <span className="text-xl font-bold text-white">
-              <span onClick={() => goto('/')} className="text-red-600 select-none">Realm of Resonance</span>
-            </span>
+          <div className="flex items-center pt-3 space-x-2 cursor-pointer">
+           <Image onClick={() => goto('/')} src={"/images/ror.svg"} height={180} width={180} alt='logo'/> 
           </div>
 
           {/* Desktop Navigation */}

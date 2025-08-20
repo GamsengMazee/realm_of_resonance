@@ -1,9 +1,10 @@
 "use client";
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef, useCallback } from "react";
 import { DateTime } from "luxon";
 import ModalComponent from "../../../component/ModalComponent";
 import Loader from "../../../component/Loader";
 import Footer from "../../../component/Footer";
+import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 
 // Type for a single slot
 interface Slot {
@@ -23,40 +24,40 @@ interface BookingType {
 }
 
 export default function BookingPage() {
+ const initialDateRef = useRef(DateTime.now().startOf("day"));
+  const [currentStartDate, setCurrentStartDate] = useState(initialDateRef.current);
   const [device, setDevice] = useState("mobile");
   const [modalShow, setModalShow] = useState(false);
-  const [currentStartDate, setCurrentStartDate] = useState(
-    DateTime.now().startOf("day")
-  );
-  const [selectedSlots, setSelectedSlots] = useState<
-    { day: DateTime; slot: string }[]
-  >([]);
-
+  const [selectedSlots, setSelectedSlots] = useState<{ day: DateTime; slot: string }[]>([]);
   const [payload, setPayload] = useState<Slot[]>([]);
-  const [bookSlots, setBookedSlots] = useState<Slot[]>([]);
-  const [isLoading, setIsLoading] = useState(true); //loader while fetching booked slots
+  const [bookedSlots, setBookedSlots] = useState<Slot[]>([]);
+  const [isLoading, setIsLoading] = useState(true);  //loader state while fetching data
 
   // Detect screen size
   useEffect(() => {
     const handleResize = () => {
       const isMobile = window.innerWidth < 800;
       setDevice(isMobile ? "mobile" : "desktop");
-      setCurrentStartDate(
-        isMobile ? DateTime.now().startOf("day") : DateTime.now().startOf("day")
-      );
     };
-    handleResize(); // on mount
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+  
+  const timeSlots = useMemo(
+    () =>
+      Array.from({ length: 15 }, (_, i) =>
+        DateTime.fromObject({ hour: 8 + i }).toFormat("h:mm a")
+      ),
+    []
+  );
+
 
   //fetch booked slots
-  const fetchBookedSlots = async () => {
+  const fetchBookedSlots =  useCallback( async() => {
     try {
       const res = await fetch("/api/bookslot");
       const data = await res.json();
-
-      console.log(data);
 
       const flatSlots = data.bookings.flatMap((booking: BookingType) => {
         const slots: Slot[] = booking.slots;
@@ -96,11 +97,11 @@ export default function BookingPage() {
     } finally {
       setIsLoading(false); //disable loader when the bookedslot is fetched
     }
-  };
+  },[timeSlots]);
 
   useEffect(() => {
     fetchBookedSlots();
-  }, []);
+  }, [fetchBookedSlots]);
 
   // Navigation
   const goToNextWeek = () => {
@@ -130,19 +131,12 @@ export default function BookingPage() {
     [currentStartDate, device]
   );
 
-  const timeSlots = useMemo(
-    () =>
-      Array.from({ length: 15 }, (_, i) =>
-        DateTime.fromObject({ hour: 8 + i }).toFormat("h:mm a")
-      ),
-    []
-  );
-
+  
   //*********** */ Select or deselect a slot*************
   const selectHandler = (day: DateTime, slot: string) => {
     const date = day.toISODate();
 
-    const isAlreadyBooked = bookSlots.some(
+    const isAlreadyBooked = bookedSlots.some(
       (s: Slot) => s.date === date && s.slot === slot
     );
     if (isAlreadyBooked) return;
@@ -178,7 +172,7 @@ export default function BookingPage() {
     const max = slotIndexes[slotIndexes.length - 1];
 
     const slotsToSelect = timeSlots.slice(min, max + 1).filter((s) => {
-      const isBooked = bookSlots.some((b) => b.date === date && b.slot === s);
+      const isBooked = bookedSlots.some((b) => b.date === date && b.slot === s);
       return !isBooked;
     });
 
@@ -227,7 +221,7 @@ export default function BookingPage() {
 
       {isLoading ? (
         <div className="flex items-center justify-center min-h-[300px]">
-          <Loader title="Loading..." />
+          <Loader title="" />
         </div>
       ) : (
         <div>
@@ -235,11 +229,11 @@ export default function BookingPage() {
             <button
               onClick={goToPreviousWeek}
               disabled={isPrevDisabled}
-              className={`px-4 py-2 text-3xl text-white ${
+              className={`px-4 py-2 text-3xl text-white flex items-center justify-center ${
                 isPrevDisabled ? "bg-gray-300" : "bg-blue-600 hover:bg-blue-700"
               } rounded`}
             >
-              ← Previous
+              <ArrowBigLeft/> <span className="hidden md:block">Previous</span>
             </button>
 
             <span className="text-sm font-semibold text-gray-500">
@@ -251,14 +245,14 @@ export default function BookingPage() {
 
             <button
               onClick={goToNextWeek}
-              className="px-4 py-2 text-white bg-blue-600 rounded font sm:text-sm hover:bg-blue-700"
+              className="flex items-center justify-center px-4 py-2 text-white bg-blue-600 rounded font sm:text-sm hover:bg-blue-700"
             >
-              Next →
+             <span className="hidden md:block">Next</span> <ArrowBigRight/>
             </button>
           </div>
           {/* -----Button for booking----- */}
           <div className="mt-3 mb-2 text-center" style={{ minHeight: "70px" }}>
-            {selectedSlots.length > 0 && (
+            {selectedSlots.length > 1 && (
               <button
                 onClick={handleBooking}
                 title="please select at least two slots"
@@ -298,7 +292,7 @@ export default function BookingPage() {
 
                     const isDisabled =
                       slotDateTime <= DateTime.now().plus({ minutes: 30 });
-                    const isBooked = bookSlots.some(
+                    const isBooked = bookedSlots.some(
                       (b) => b.date === day.toISODate() && b.slot === slot
                     );
                     return (

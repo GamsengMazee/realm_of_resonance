@@ -1,34 +1,40 @@
 'use client';
 
-import { Volume2, Mail, Phone, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Instagram } from 'lucide-react';
+import { FaWhatsapp } from "react-icons/fa";
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const Footer = () => {
+  const router = useRouter()
+  
+    const goto = (page: string) => {
+      router.push(`${page}`)
+    };
   return (
-    <footer className="bg-black border-t border-gray-800">
+    <footer className="relative z-20 bg-black border-t border-gray-800">
       <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Logo and Description */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-4 space-x-2">
-              <Volume2 className="w-8 h-8 text-red-600" />
-              <span className="text-xl font-bold text-white">
-                <span className="text-red-600">RoR</span> Realm of Resonance
-              </span>
+              <Image onClick={() => goto('/')} src={"/images/ror.svg"} height={100} width={200} alt='logo'/> 
             </div>
             <p className="max-w-md mb-4 text-gray-400">
-              Professional music studio and jamming house designed for metal musicians. 
+              Professional music studio and jamming house designed for musicians. 
               Unleash your sound in our state-of-the-art facility.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 transition-colors duration-200 hover:text-red-600">
-                <Facebook className="w-6 h-6" />
+              <a href="https://www.facebook.com/share/1FHbY163n5/?mibextid=wwXIfr" target="_blank" className="text-gray-400 transition-colors duration-200 hover:text-red-600">
+                <Facebook className="w-6 h-6 rounded hover:bg-blue-500" />
               </a>
               <a href="#" className="text-gray-400 transition-colors duration-200 hover:text-red-600">
-                <Instagram className="w-6 h-6" />
+                <Instagram className="w-6 h-6 rounded hover:bg-amber-700" />
               </a>
-              <a href="#" className="text-gray-400 transition-colors duration-200 hover:text-red-600">
-                <Twitter className="w-6 h-6" />
+               <a href="#" className="text-gray-400 transition-colors duration-200 hover:text-red-600">
+                <FaWhatsapp size={25} className='rounded hover:bg-green-500'/>
               </a>
+             
             </div>
           </div>
 
@@ -38,15 +44,15 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
                 <Phone className="w-4 h-4 text-red-600" />
-                <span className="text-gray-400">+1 (555) 123-4567</span>
+                <span className="text-gray-400">+91 8414973091</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="w-4 h-4 text-red-600" />
-                <span className="text-gray-400">info@realmofresonance.com</span>
+                <span className="text-gray-400">realmofr@gmail.com</span>
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="w-4 h-4 text-red-600" />
-                <span className="text-gray-400">123 Metal Street<br />Rock City, RC 12345</span>
+                <span className="text-gray-400">Teteng A⋅ja<br />Sunset Square</span>
               </div>
             </div>
           </div>
@@ -56,7 +62,7 @@ const Footer = () => {
             <h3 className="mb-4 font-semibold text-white">Quick Links</h3>
             <div className="space-y-3">
               <button
-                onClick={() => document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => goto('/')}
                 className="block text-gray-400 transition-colors duration-200 hover:text-white"
               >
                 Home
@@ -73,9 +79,6 @@ const Footer = () => {
               >
                 Booking
               </button>
-              <a href="#" className="block text-gray-400 transition-colors duration-200 hover:text-white">
-                FAQ
-              </a>
             </div>
           </div>
         </div>

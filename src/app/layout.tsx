@@ -1,21 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navigation from "../../component/Navigation";
+import Bootror from "../../component/Bootror";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
-  title: "Realm of Resonance",
+  title: "Realm of Resonance - Book Jamhouse in Tura, Meghalaya",
   description: "Come and Jam with us!",
+  icons: {
+    icon: '/images/favicon.ico'
+  }
 };
 
 export default function RootLayout({
@@ -23,16 +16,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`antialiased`}
       >
         <div className="min-h-screen bg-black">
-        <Navigation />
-
-        <div className="pt-16">{children}</div>
-        
+          <Bootror children={children}/>   
         </div>
       </body>
     </html>

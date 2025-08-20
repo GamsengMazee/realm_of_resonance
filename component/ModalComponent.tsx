@@ -84,14 +84,14 @@ function ModalComponent({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onHide(); // Hide the modal
-    setShowLoader(true); // Show loader
 
     const validationErrors = validate(formData);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors as Errors);
       setShowLoader(false); // Hide loader if validation fails
     } else {
+       onHide(); // Hide the modal
+        setShowLoader(true); // Show loader
       try { 
         const random_no = random_number()
         
