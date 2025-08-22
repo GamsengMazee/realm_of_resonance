@@ -17,6 +17,7 @@ type UserBooking = {
   contact: string; // User's contact number
   address: string; // User's address
   token_id: string;
+  booked_on: string;
   slots: SlotBooking[]; // Array of SlotBooking objects
 };
 
@@ -71,8 +72,11 @@ function ModalComponent({
     contact: "",
     address: "",
     token_id: "",
+    booked_on: "",
     slots: [],
   });
+
+  const booked_on = DateTime.utc().toISO();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -102,8 +106,9 @@ function ModalComponent({
             name: formData.name,
             email: formData.email,
             contact: formData.contact,
+            booked_on: booked_on,
             address: formData.address,
-            token_id: `ROR${random_no}${DateTime.local().year}`,
+            token_id: `ROR${random_no}${DateTime.local().day}${DateTime.local().year}`,
             slots: payload,
           }),
         });
@@ -121,6 +126,7 @@ function ModalComponent({
           email: data.data.saved.email,
           contact: data.data.saved.contact,
           address: data.data.saved.address,
+          booked_on: booked_on,
           token_id: data.data.saved.token_id,
           slots: data.data.saved.slots,
         });
@@ -151,7 +157,7 @@ function ModalComponent({
   return (
     <>
       {/*Loader while submitting forms*/}
-      {showLoader && <Loader title="Please Wait" />}
+      {showLoader && <Loader title="" />}
       {/*Modal after successful booking*/}
       <BookingConfirmation
       data={bookedData}

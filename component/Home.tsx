@@ -15,7 +15,7 @@ const Home = () => {
       className="relative z-10 flex items-center justify-center min-h-screen overflow-hidden md:pt-0 bg-gradient-to-br from-gray-900 to-black "
     >
       {/* Background */}
-      <div className="fixed z-0 -translate-x-1/2 -translate-y-1/2 bg-center bg-cover brightness-50 h-1/2 left-1/2 top-1/2">
+      <div className="fixed z-0 -translate-x-1/2 -translate-y-1/2 bg-fixed bg-center bg-cover brightness-50 h-1/2 left-1/2 top-1/2">
         <Image
           className="z-0 pointer-events-none"
           src="/images/ror_background2.svg"

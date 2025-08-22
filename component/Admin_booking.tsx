@@ -2,7 +2,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import { DateTime } from "luxon";
-import Loader from "./Loader";
 
 // Slot with user info
 interface Slot {

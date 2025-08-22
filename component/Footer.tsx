@@ -68,13 +68,13 @@ const Footer = () => {
                 Home
               </button>
               <button
-                onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => goto("/about")}
                 className="block text-gray-400 transition-colors duration-200 hover:text-white"
               >
                 About Us
               </button>
               <button
-                onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => goto('/booking')}
                 className="block text-gray-400 transition-colors duration-200 hover:text-white"
               >
                 Booking

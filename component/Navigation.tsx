@@ -41,6 +41,13 @@ const Navigation = () => {
             >
               About
             </Link>
+
+            <Link
+              href="/cancel"
+              className="font-medium text-gray-300 list-none transition-colors duration-200 hover:text-white"
+            >
+              Cancel Booking
+            </Link>
           
             <Button 
               onClick={() => goto('/booking')}
@@ -76,6 +83,13 @@ const Navigation = () => {
                 className="block w-full px-3 py-2 text-left text-gray-300 transition-colors duration-200 hover:text-white"
               >
                 About
+              </button>
+
+              <button
+                onClick={() => goto('/cancel')}
+                className="block w-full px-3 py-2 text-left text-gray-300 transition-colors duration-200 hover:text-white"
+              >
+                Cancel Booking
               </button>
               <Button 
                 onClick={() => goto('/booking')}

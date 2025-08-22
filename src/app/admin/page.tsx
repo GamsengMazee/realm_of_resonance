@@ -5,6 +5,7 @@ import {
   Clock,
   ArrowDown,
   ArrowUp,
+  Ban,
 } from "lucide-react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import DashboardContent from "../../../component/DashboardContent";
@@ -18,11 +19,13 @@ import {
   getTotalStats,
 } from "../../../utils/calculateMontly";
 import LoginCard from "../../../component/LoginCard";
+import Admin_cancelList from "../../../component/Admin_cancelList";
 
 const menuItems = [
   { name: "Dashboard", id: "dashboard", icon: <LayoutDashboard /> },
   { name: "All Bookings", id: "all-bookings", icon: <Calendar /> },
   { name: "Slots", id: "slots", icon: <Clock /> },
+  { name: "Cancelled", id: "cancel", icon: <Ban /> },
 ];
 
 // Slot with user info
@@ -37,6 +40,7 @@ interface BookingType {
   name: string;
   email: string;
   contact: string;
+  booked_on: string;
   address: string;
   token_id: string;
   slots: Slot[];
@@ -57,6 +61,7 @@ export default function AdminDashboard() {
   const [bookSlots, setBookedSlots] = useState<SlotWithUser[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [bookedData, setBookedData] = useState<BookingType[]>([]);
+  const [cancelledSlots, setCancelledSlots] = useState<BookingType[]>([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [todayBookingData, setTodaysBookingData] = useState({
     todays_booking: "",
@@ -67,9 +72,9 @@ export default function AdminDashboard() {
     currentMonth_hours: "",
     prevMonths_bookings: "",
     prevMonths_hours: "",
-    user_1: { user_name: "", slots_booked: "" },
-    user_2: { user_name: "", slots_booked: "" },
-    user_3: { user_name: "", slots_booked: "" },
+    user_1: { user_name: "", slots_booked: "", booked_on: "" },
+    user_2: { user_name: "", slots_booked: "", booked_on: "" },
+    user_3: { user_name: "", slots_booked: "", booked_on: "" },
   });
 
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -149,9 +154,11 @@ export default function AdminDashboard() {
           ? {
               user_name: booking.name,
               slots_booked: `${Math.max(booking.slots.length - 1, 0)}`,
+              booked_on: booking.booked_on,
             }
-          : { user_name: "", slots_booked: "0" };
+          : { user_name: "", slots_booked: "0", booked_on: "" };
       };
+
       //data for dashboard content
       setTodaysBookingData({
         todays_booking: `${todayBookings}`,
@@ -170,6 +177,17 @@ export default function AdminDashboard() {
       console.error("Error fetching slots:", error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  // fetch all the cancelled data
+  const fetchCancelledSlots = async () => {
+    try {
+      const res = await fetch("/api/admin_cancelled_user");
+      const data = await res.json();
+      setCancelledSlots(data.cancelled);
+    } catch (error) {
+      console.error("Error fetching slots:", error);
     }
   };
 
@@ -196,7 +214,8 @@ export default function AdminDashboard() {
   useEffect(() => {
     fetchBookedSlots();
     authenticate();
-  },[]);
+    fetchCancelledSlots();
+  }, []);
 
   const loginHandler = async () => {
     setIsLoggedIn(true);
@@ -326,6 +345,19 @@ export default function AdminDashboard() {
                     </p>
                   </div>
                   <AdminSlots booked_data={bookedData} />
+                </div>
+              )}
+              {activeMenu === "cancel" && (
+                <div>
+                  <div>
+                    <p className="mt-2 mb-4 text-4xl text-center text-green-400">
+                      Cancelled Bookings
+                    </p>
+                    <p className="text-center text-gray-400">
+                      View and manage all cancelled bookings here
+                    </p>
+                  </div>
+                  <Admin_cancelList data={cancelledSlots}/>
                 </div>
               )}
             </main>

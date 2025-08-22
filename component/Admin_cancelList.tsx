@@ -22,7 +22,7 @@ interface BookingType {
 
 // Props type
 interface PropsType {
-  booked_data: BookingType[];
+  data: BookingType[];
 }
 
 let user = {
@@ -36,11 +36,11 @@ let user = {
   __v: 0,
 }
 
-function AdminSlots({ booked_data }: PropsType) {
+function Admin_cancelList({ data }: PropsType) {
   const itemsPerPage = 15;
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedDate, setSelectedDate] = useState<string | null>(DateTime.now().toISODate());
+  const [selectedDate, setSelectedDate] = useState<string | null>();
   const [userDetail, setUserDetail] = useState<BookingType>(user)
   const [showModal, setShowModal] = useState(false)
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -60,7 +60,7 @@ function AdminSlots({ booked_data }: PropsType) {
   }
 
   // Filter the booked data based on search query and selected date
-  const filteredData = booked_data.filter((entry) => {
+  const filteredData = data.filter((entry) => {
     const searchTerm = searchQuery.toLowerCase();
     const matchesSearch =
       entry.name.toLowerCase().trim().includes(searchTerm) ||
@@ -193,7 +193,7 @@ function AdminSlots({ booked_data }: PropsType) {
               })}
             </tbody>
           </table>
-          <AdminModalComponent data={userDetail} modalShow={showModal} handleClose={handleClose} apiParam="adminapi"/>
+          <AdminModalComponent data={userDetail} modalShow={showModal} handleClose={handleClose} apiParam="admin_cancelled_user"/>
         </div>
 
         {/* Pagination */}
@@ -223,4 +223,4 @@ function AdminSlots({ booked_data }: PropsType) {
   );
 }
 
-export default AdminSlots;
+export default Admin_cancelList;

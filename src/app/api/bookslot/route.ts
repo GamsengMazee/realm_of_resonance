@@ -30,9 +30,9 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, contact, address, token_id, slots } = body;
+    const { name, email, contact, address, token_id, slots, booked_on } = body;
 
-    console.log(name, email, contact, address, token_id, slots);
+    console.log(name, email, contact, address, token_id, slots, booked_on);
 
     // validation but email is optional
     if (!name || !contact || !address || !slots) {
@@ -50,6 +50,7 @@ export async function POST(request: Request) {
       contact,
       address,
       token_id,
+      booked_on,
       slots,
     });
     const saved = await dbData.save();

@@ -1,6 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
-const booking_data = new Schema({
+const cancelled_data = new Schema({
     name: {
         type: String,
         required: true
@@ -33,6 +33,6 @@ const booking_data = new Schema({
     
 })
 
-const bookingSchema = models.booking_data || model("booking_data", booking_data)
+const cancelledSchema = models.cancelled_data || model("cancelled_data", cancelled_data)
 
-export default bookingSchema;
+export default cancelledSchema;

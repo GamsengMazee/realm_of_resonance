@@ -1,3 +1,5 @@
+import { DateTime } from "luxon";
+
 // Slot with user info
 interface Slot {
   date: string;
@@ -13,9 +15,9 @@ interface TodaysProps {
   currentMonth_hours: string;
   prevMonths_bookings: string;
   prevMonths_hours: string;
-  user_1: { user_name: string; slots_booked: string };
-  user_2: { user_name: string; slots_booked: string };
-  user_3: { user_name: string; slots_booked: string };
+  user_1: { user_name: string; slots_booked: string; booked_on: string; };
+  user_2: { user_name: string; slots_booked: string; booked_on: string; };
+  user_3: { user_name: string; slots_booked: string; booked_on: string; };
 }
 
 interface SlotWithUser extends Slot {
@@ -31,10 +33,21 @@ interface PropsType {
 }
 
 export default function DashboardContent({ todays_data }: PropsType) {
+  
+   
+  const timeAgoFn = (a:string) => {
+     const reviewDateTime = DateTime.fromISO(a); 
+     const now = DateTime.local();
+
+     const timeAgo = reviewDateTime.toRelative({ base: now });
+
+     return timeAgo
+  }
+
   return (
     <>
       <header className="mb-8">
-        <p className="text-4xl font-bold text-center text-green-400 ">
+        <p className="text-4xl text-center text-green-400 ">
           Dashboard
         </p>
         <p className="mt-2 text-center text-gray-400">
@@ -60,7 +73,7 @@ export default function DashboardContent({ todays_data }: PropsType) {
             Hours Booked Today
           </p>
           <p className="text-3xl font-bold text-center text-green-400">
-            {todays_data.hours_booked_today}
+            {(Number(todays_data.hours_booked_today) < 0) ? 0 : todays_data.hours_booked_today}
           </p>
           <p className="mt-1 text-center text-green-300">-3% from last week</p>
         </div>
@@ -139,30 +152,30 @@ export default function DashboardContent({ todays_data }: PropsType) {
         <div className="bg-gray-800 rounded-lg shadow-lg md:p-6">
           <ul className="p-2 divide-y divide-gray-700">
             <li className="flex justify-between py-3">
-              <span>
+              {timeAgoFn(todays_data.user_1.booked_on) && <span>
                 {todays_data.user_1.user_name} has booked{" "}
                 {todays_data.user_1.slots_booked} hours
-              </span>
+              </span>}
               <time className="ml-1 text-sm text-gray-400 md:ml-0">
-                2 hours ago
+                {timeAgoFn(todays_data.user_1.booked_on)}
               </time>
             </li>
             <li className="flex justify-between py-3">
-              <span>
+              {timeAgoFn(todays_data.user_2.booked_on) && <span>
                 {todays_data.user_2.user_name} has booked{" "}
                 {todays_data.user_2.slots_booked} hours
-              </span>
+              </span>}
               <time className="ml-1 text-sm text-gray-400 md:ml-0">
-                5 hours ago
+                {timeAgoFn(todays_data.user_2.booked_on)}
               </time>
             </li>
             <li className="flex justify-between py-3">
-              <span>
+              {timeAgoFn(todays_data.user_3.booked_on) && <span>
                 {todays_data.user_3.user_name} has booked{" "}
                 {todays_data.user_3.slots_booked} hours
-              </span>
+              </span>}
               <time className="ml-1 text-sm text-gray-400 md:ml-0">
-                1 day ago
+                {timeAgoFn(todays_data.user_3.booked_on)}
               </time>
             </li>
           </ul>

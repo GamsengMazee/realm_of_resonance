@@ -220,7 +220,7 @@ export default function BookingPage() {
       </h1>
 
       {isLoading ? (
-        <div className="flex items-center justify-center min-h-[300px]">
+        <div className="flex items-center justify-center ">
           <Loader title="" />
         </div>
       ) : (
