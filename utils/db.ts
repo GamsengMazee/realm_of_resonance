@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const uri = `mongodb+srv://${process.env.UNAME}:${process.env.PASSWORD}@ror.pf4v7bk.mongodb.net/?retryWrites=true&w=majority&appName=RoR`;
+const uri = `mongodb+srv://${process.env.UNAME}:${process.env.PASSWORD}@notification.zsunp22.mongodb.net/?retryWrites=true&w=majority&appName=Notification`;
 
 let isConnected = false;
 
