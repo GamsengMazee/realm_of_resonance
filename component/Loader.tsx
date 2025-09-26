@@ -42,6 +42,7 @@ const Loader = ({ title }: PropsType) => {
           width={imageSize}
           height={imageSize}
           alt="Loading"
+          priority
         />
         <p className="z-10 ml-5 text-lg font-medium text-white">{title}</p>
       </div>

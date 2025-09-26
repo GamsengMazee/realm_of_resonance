@@ -57,13 +57,24 @@ function BookingConfirmation({ modalShow, handleClose, data }: typeProps) {
         </Modal.Header>
         <Modal.Body>
           <div className="container">
-            <div className="flex justify-around">
-              <div>
-                <p className="text-center"><span className="font-bold">Token Id:</span> {data.token_id}</p>
-                <p><span className="font-bold">Date:</span> {date}</p>
+            <div className="flex flex-col justify-around md:flex-start">
+              <div className="flex flex-col md:flex-start">
+                <p className="text-sm text-center md:text-base">
+                  <span className="text-sm font-bold md:text-base">
+                    Token Id:
+                  </span>{" "}
+                  {data.token_id}
+                </p>
+                <p className="text-sm text-center md:text-base">
+                  <span className="text-sm font-bold md:text-base">Date:</span>{" "}
+                  {date}
+                </p>
               </div>
 
-              <p className="text-center"><span className="font-bold">Timing:</span> {timing}</p>
+              <p className="text-sm text-center md:text-base md:text-left">
+                <span className="text-sm font-bold md:text-base">Timing:</span>{" "}
+                {timing}
+              </p>
             </div>
 
             <hr />
@@ -75,10 +86,13 @@ function BookingConfirmation({ modalShow, handleClose, data }: typeProps) {
             </ul>
           </div>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer >
+          <div className="flex items-center justify-between w-full">
+          <p className="text-red-500 text-[13px] md:text-[16px]">Note*: <span>Screenshot this for future reference</span></p>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
+          </div>
         </Modal.Footer>
       </Modal>
     </>

@@ -8,7 +8,7 @@ const About = () => {
     {
       icon: <Guitar className="w-8 h-8 text-red-600" />,
       title: "Guitar Amplifiers",
-      description: "Marshall, Mesa Boogie, and Orange tube amplifiers for that perfect metal tone"
+      description: "Boss Katana 100 Gen3 and Hartke Hd50 for that perfect tone"
     },
     {
       icon: <Drum className="w-8 h-8 text-orange-600" />,
@@ -23,11 +23,11 @@ const About = () => {
     {
       icon: <Headphones className="w-8 h-8 text-orange-600" />,
       title: "Monitoring",
-      description: "Professional studio monitors and headphone systems for clear sound"
+      description: "Professional studio monitors with Yamaha dbr12 for clear sound"
     },
     {
       icon: <Clock className="w-8 h-8 text-red-600" />,
-      title: "24/7 Access",
+      title: "8:00 am - 10:00 pm",
       description: "Flexible booking hours to accommodate your band's schedule"
     },
     {
@@ -44,11 +44,14 @@ const About = () => {
           <h2 className="mb-6 text-4xl font-bold md:text-5xl">
             <span className="text-white">About </span>
           </h2>
-          <p className="max-w-3xl mx-auto text-xl text-gray-300">
-            Located in the heart of the music district, Realm of Resonance is a cutting-edge 
-            jamming house and studio designed specifically for metal musicians. Our facility 
-            combines professional-grade equipment with an atmosphere that inspires creativity 
-            and raw musical expression.
+          <p className="max-w-4xl mx-auto text-left text-gray-300 text-xl/relaxed">
+            <span className='md:ml-10'>Realm</span> of Resonance is a dedicated space for musicians and artists located at Sunset Square, Te⋅teng A⋅ja, Tura, Meghalaya. 
+            Designed with creativity and comfort in mind, our fully soundproof Jamroom offers a professional environment equipped with high-quality amps, sound systems, and air-conditioning — perfect for rehearsals, recordings, or jam sessions. 
+          </p>
+          <p className="max-w-4xl mx-auto mt-1 text-left text-gray-300 text-xl/relaxed">
+            <span className='md:ml-10'>Whether</span> you're a solo artist or part of a band, Realm of Resonance provides the ideal atmosphere to explore your sound and elevate your craft. 
+            With easy online booking and a commitment to supporting local talent, 
+            we aim to be the heartbeat of Tura’s growing music scene.
           </p>
         </div>
 
@@ -89,7 +92,7 @@ const About = () => {
                 <div className="w-2 h-2 mt-2 bg-orange-600 rounded-full"></div>
                 <p className="text-gray-300">
                   <strong className="text-white">Quality Equipment:</strong> Top-tier amplifiers, 
-                  drums, and recording equipment maintained to perfection.
+                  drums, and professional studio monitors maintained to perfection.
                 </p>
               </div>
               <div className="flex items-start space-x-3">

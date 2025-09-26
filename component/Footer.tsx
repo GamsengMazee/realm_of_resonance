@@ -25,13 +25,13 @@ const Footer = () => {
               Unleash your sound in our state-of-the-art facility.
             </p>
             <div className="flex space-x-4">
-              <a href="https://www.facebook.com/share/1FHbY163n5/?mibextid=wwXIfr" target="_blank" className="text-gray-400 transition-colors duration-200 hover:text-red-600">
+              <a href="https://www.facebook.com/share/1FHbY163n5/?mibextid=wwXIfr" target="_blank" className="text-white transition-colors duration-200 hover:text-red-600">
                 <Facebook className="w-6 h-6 rounded hover:bg-blue-500" />
               </a>
-              <a href="#" className="text-gray-400 transition-colors duration-200 hover:text-red-600">
+              <a href="#" className="text-white transition-colors duration-200 hover:text-red-600">
                 <Instagram className="w-6 h-6 rounded hover:bg-amber-700" />
               </a>
-               <a href="#" className="text-gray-400 transition-colors duration-200 hover:text-red-600">
+               <a href={`https://wa.me/918414973091`} className="text-white transition-colors duration-200 hover:text-red-600">
                 <FaWhatsapp size={25} className='rounded hover:bg-green-500'/>
               </a>
              
@@ -87,7 +87,7 @@ const Footer = () => {
         <div className="pt-8 mt-8 text-center border-t border-gray-800">
           <p className="text-gray-400">
             © 2025 Realm of Resonance. All rights reserved.
-            <span className="ml-1 text-gray-400">| Designed by MarakLab |</span>
+            <span className="ml-1 text-gray-400">| <a className='hover:text-white' href='https://www.facebook.com/share/1Aa4Y2V7Mw/'>Designed by MarakLab </a>|</span>
           </p>
         </div>
       </div>

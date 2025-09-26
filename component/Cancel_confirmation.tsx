@@ -15,7 +15,7 @@ interface PropsType{
 }
 
 function Cancel_confirmation({data}:PropsType) {
-    console.log(data)
+    
     const booking_data = DateTime.fromISO(data.booked_on.slice(0, 10)).toFormat('dd/MM/yyyy')
   return (
     <div className="px-4 py-4 mt-10 border-gray-500 rounded border-1">

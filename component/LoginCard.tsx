@@ -59,7 +59,7 @@ export default function LoginCard({login}:PropsType) {
         
        const data = await res.json();
         login()     //change the login state to true in admin page
-       console.log(data)
+       
     } catch (error) {
       setShowInvalid(true)
       console.log(error)

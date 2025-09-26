@@ -119,7 +119,7 @@ function ModalComponent({
         }
 
         const data = await res.json();
-        console.log(data.data.saved);
+        
         /*----response is stored in state-----*/
         setBookedData({
           name: data.data.saved.name,
