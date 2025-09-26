@@ -32,8 +32,6 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { name, email, contact, address, token_id, slots, booked_on } = body;
 
-    console.log(name, email, contact, address, token_id, slots, booked_on);
-
     // validation but email is optional
     if (!name || !contact || !address || !slots) {
       return new Response(JSON.stringify({ error: "Missing fields" }), {

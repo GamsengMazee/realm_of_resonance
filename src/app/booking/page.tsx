@@ -236,7 +236,7 @@ export default function BookingPage() {
               <ArrowBigLeft/> <span className="hidden md:block">Previous</span>
             </button>
 
-            <span className="text-sm font-semibold text-gray-500">
+            <span onClick={() => setCurrentStartDate(DateTime.now().startOf("day"))} className="text-sm font-semibold text-gray-500 cursor-pointer">
               {currentStartDate.toFormat("dd LLL")} -{" "}
               {currentStartDate
                 .plus({ days: device === "mobile" ? 1 : 6 })

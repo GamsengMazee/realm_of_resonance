@@ -193,6 +193,7 @@ export default function AdminDashboard() {
 
   //Redirect to homepage if cookie does not exist or verify cookie if it exist
   const authenticate = useCallback(async () => {
+    setIsLoading(true)
     try {
       const response = await fetch("/api/auth0", {
         method: "GET",
@@ -203,8 +204,10 @@ export default function AdminDashboard() {
 
       if (response.status === 201) {
         setIsLoggedIn(true);
+        setIsLoading(false)
       } else {
         setIsLoggedIn(false);
+        setIsLoading(false)
       }
     } catch (error) {
       console.log(error);

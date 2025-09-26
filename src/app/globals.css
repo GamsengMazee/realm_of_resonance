@@ -68,8 +68,7 @@ body {
 }
 a {
   text-decoration: none;
-  color: inherit;
-  color: white;
+  color: #99a1af;
 }
 @layer utilities {
   .text-glow {
@@ -78,6 +77,10 @@ a {
   
   .metal-gradient {
     background: linear-gradient(135deg, #1f1f1f 0%, #0a0a0a 100%);
+  }
+
+  .text-gradient {
+    color: #ea580c;
   }
   
   .fire-gradient {

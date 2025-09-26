@@ -1,6 +1,17 @@
 import Register from "../../../../models/register_schema";
 import db from "../../../../utils/db";
 
+/**
+ * @route       POST /api/users/:id
+ * @description Add admin credentials into the db
+ * @access      Admin
+ * @author      Gam Marak
+ * @created     2025-09-04
+ *
+ * @returns     {Object} 200 - JSON object of the user
+ *              {Object} 500 - Server error
+ */
+
 //This is not for production
 export async function POST(request: Request) {
     const body = await request.json();

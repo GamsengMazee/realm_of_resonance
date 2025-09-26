@@ -2,6 +2,19 @@ import { NextResponse } from "next/server";
 import bookingSchema from "../../../../../models/booking_schema";
 import db from "../../../../../utils/db";
 
+/**
+ * @route       DELETE /api/adminapi/:id
+ * @description  Delete a user by their unique ID
+ * @access      Public
+ * @author      Gam Marak
+ * @created     2025-09-04
+ *
+ * @param       {string} req.params.id - The ID of the user
+ * @returns     {Object} 200 - JSON object of the user
+ *              {Object} 404 - User not found
+ *              {Object} 500 - Server error
+ */
+
 
 
 export async function DELETE(
